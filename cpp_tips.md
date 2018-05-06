@@ -25,7 +25,11 @@ auto array_size(const T (&)[S]) -> size_t
 }
 ```
 
+### Never include a cpp file if possible
+Every file included should have a guard 
+
 ### Templates definition should be written or include in the header. Or we need explicit tenplate instantiation after definition in cpp files.
+**Solution 1.2 and 2.2 are not recommended, since they have a included cpp file.**  
 [Storing C++ template function definitions in a .CPP file](https://stackoverflow.com/questions/115703/storing-c-template-function-definitions-in-a-cpp-file)  
 [deeper description of this](https://isocpp.org/wiki/faq/templates#templates-defn-vs-decl)  
 - Solution 1.1  
@@ -53,6 +57,13 @@ auto array_size(const T (&)[S]) -> size_t
 // instantiate.cpp
 #include "imp.cpp"
 // explicit instantiation of templates
+
+// imp.cpp
+#ifndef YYY
+#define YYY
+#include "dec.h"
+// template class member definition
+#endif
  ```
 
 
@@ -81,6 +92,3 @@ delete &ref;
 ```
 > In general, to get from T* to T& you use * to "dereference" the pointer.
 However this is not a very good idea in the first place. You usually use pointers to store addresses of heap-allocated objects.
-
-### Never include a cpp file if possible
-Every file included should have a guard 
