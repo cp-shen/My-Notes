@@ -39,15 +39,24 @@ auto array_size(const T (&)[S]) -> size_t
 #include "impl.cpp"
 #endif
 
-// imp.c
+// imp.cpp
 #ifndef YYY
 #define YYY
-#include "dec.cpp"
+#include "dec.h"
 // template class member definition
 #endif
 ```
 - Solution 2.1  
  Explicit tenplate instantiation after definition in cpp files.
+- Solution 2.2  
+ ```c++
+// instantiate.cpp
+#ifndef ZZZ
+#define ZZZ
+#include "imp.cpp"
+// explicit instantiation of templates
+#endif
+ ```
 
 
 ### Containers can NOT hold references.
