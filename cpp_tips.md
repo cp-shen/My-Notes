@@ -1,6 +1,6 @@
 ### **Always** initialize the value of variables and attributes before usage.
-- [Why aren't pointers initialized with NULL by default?](https://stackoverflow.com/questions/1910832/why-arent-pointers-initialized-with-null-by-default)
-- [Default variable value](https://stackoverflow.com/questions/6032638/default-variable-value)
+- [Why aren't pointers initialized with NULL by default?](https://stackoverflow.com/questions/1910832/why-arent-pointers-initialized-with-null-by-default)  
+- [Default variable value](https://stackoverflow.com/questions/6032638/default-variable-value)  
 
 ### Non-virtual function uses static binding and does NOT allow polymorphism.
 - [Overriding non-virtual methods](https://stackoverflow.com/questions/11067975/overriding-non-virtual-methods)
@@ -26,8 +26,8 @@ auto array_size(const T (&)[S]) -> size_t
 ```
 
 ### Templates definition should be written or include in the header. Or we need explicit tenplate instantiation after definition in cpp files.
-[Storing C++ template function definitions in a .CPP file](https://stackoverflow.com/questions/115703/storing-c-template-function-definitions-in-a-cpp-file)
-[deeper description of this](https://isocpp.org/wiki/faq/templates#templates-defn-vs-decl)
+[Storing C++ template function definitions in a .CPP file](https://stackoverflow.com/questions/115703/storing-c-template-function-definitions-in-a-cpp-file)  
+[deeper description of this](https://isocpp.org/wiki/faq/templates#templates-defn-vs-decl)  
 - Solution 1.1  
  The first solution is to physically move the definition of the template functions into the .h file, even if they are not inline functions. 
 - Solution 1.2  
