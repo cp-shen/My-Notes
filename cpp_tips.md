@@ -51,11 +51,8 @@ auto array_size(const T (&)[S]) -> size_t
 - Solution 2.2  
  ```c++
 // instantiate.cpp
-#ifndef ZZZ
-#define ZZZ
 #include "imp.cpp"
 // explicit instantiation of templates
-#endif
  ```
 
 
