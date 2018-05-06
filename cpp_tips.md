@@ -82,4 +82,5 @@ delete &ref;
 > In general, to get from T* to T& you use * to "dereference" the pointer.
 However this is not a very good idea in the first place. You usually use pointers to store addresses of heap-allocated objects.
 
-### Never include a cpp file
+### Never include a cpp file if possible
+Every file included should have a guard 
