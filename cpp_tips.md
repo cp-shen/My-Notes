@@ -28,6 +28,27 @@ auto array_size(const T (&)[S]) -> size_t
 ### Templates definition should be written or include in the header. Or we need explicit tenplate instantiation after definition in cpp files.
 [Storing C++ template function definitions in a .CPP file](https://stackoverflow.com/questions/115703/storing-c-template-function-definitions-in-a-cpp-file)
 [deeper description of this](https://isocpp.org/wiki/faq/templates#templates-defn-vs-decl)
+- Solution 1.1  
+ The first solution is to physically move the definition of the template functions into the .h file, even if they are not inline functions. 
+- Solution 1.2  
+```c++
+// dec.h
+#ifndef XXX
+#define XXX
+// template class declaration
+#include "impl.cpp"
+#endif
+
+// imp.c
+#ifndef YYY
+#define YYY
+#include "dec.cpp"
+// template class member definition
+#endif
+```
+- Solution 2.1  
+ Explicit tenplate instantiation after definition in cpp files.
+
 
 ### Containers can NOT hold references.
 Containers store objects. References are not objects.  
