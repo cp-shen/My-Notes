@@ -92,3 +92,22 @@ delete &ref;
 ```
 > In general, to get from T* to T& you use * to "dereference" the pointer.
 However this is not a very good idea in the first place. You usually use pointers to store addresses of heap-allocated objects.
+
+### Class definition in header
+C and C++ behave very much the same in this regard -- you can have inline functions in headers. In C++, any method whose body is inside the class definition is implicitly inline. If you want to do the same in C, declare the functions static inline
+
+### When to use inline functions?
+function definition included in multiple source files must be inline  
+[inline specifier](http://en.cppreference.com/w/cpp/language/inline)  
+[When to use inline function and when not to use it?](stackoverflow.com/questions/1932311/when-to-use-inline-function-and-when-not-to-use-it)
+
+### When to use **noexcept** specifier
+[noexcept specifier](http://en.cppreference.com/w/cpp/language/noexcept_spec)  
+[When should I really use noexcept?](https://stackoverflow.com/questions/10787766/when-should-i-really-use-noexcept)  
+```c++
+extern void f();  // potentially-throwing
+void g() noexcept {
+    f();      // valid, even if f throws
+    throw 42; // valid, effectively a call to std::terminate
+}
+```
