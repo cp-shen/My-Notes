@@ -351,7 +351,7 @@ isUpperAlphanum :: Char -> Bool
 isUpperAlphanum = (`elem` ['A'..'Z'])
 ```
 
-
+> The only thing to watch out for with sections is when you’re using the **- (negative or minus) operator.** From the definition of sections, (-4) would result in a function that takes a number and subtracts 4 from it. However, **for convenience, (-4) means negative four**. So if you want to make a function that subtracts 4 from the number it gets as a parameter, you can partially apply the subtract function like so: (subtract 4).
 
 ### Some Higher-Orderism Is in Order
 
@@ -374,5 +374,92 @@ ghci> applyTwice (multThree 2 2) 9
 
 ghci> applyTwice (3:) [1] 
 [3,3,1]
+
+
+zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c] 
+zipWith' _ [] _ = [] 
+zipWith' _ _ [] = [] 
+zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
+
+flip' :: (a -> b -> c) -> (b -> a -> c) 
+flip' f y x = f x y 
+
+```
+
+### The Functional Programmer's Toolbox
+
+- map
+- filter
+- takeWhile
+- sum
+- length
+
+```haskell
+ghci> sum (takeWhile (<10000) (filter odd (map (^2) [1..])))
+ghci> sum (takeWhile (<10000) [m | m <- [n^2 | n <- [1..]], odd m])
+
+166650
+
+
+result :: Integral p => [p]
+result = filter collatzLenGreaterThan15 [1..100]
+  where
+    collatzLenGreaterThan15 x = count (collatz x) > 15
+      where
+        collatz x 
+          | x < 1 = []
+          | x == 1 = [1]
+          | even x = x : collatz (div x 2)
+          | odd x = x : collatz (x * 3 + 1) 
+          | otherwise = []
+        count xs = sum (map one xs)
+          where 
+            one x = 1
+
+```
+
+### Lambdas
+
+> Lambdas are **anonymous functions** that we use when we need a function **only once**.
+>
+> Normally, we make a lambda with the sole purpose of **passing it to a higher-order function**
+>
+> Lambdas are **expressions**, which is why we can just pass them to functions like this. 
+>
+> The expression (\xs -> length xs > 15) returns a function that tells us whether the length of the list passed to it is greater than 15.
+
+```haskell
+ghci> zipWith (\a b -> (a * 30 + 3) / b) [5,4,3,2,1] [1,2,3,4,5] 
+[153.0,61.5,31.0,15.75,6.6]
+
+ghci> map (\(a,b) -> a + b) [(1,2),(3,5),(6,3),(2,6),(2,5)]
+[3,8,9,8,7]
+--If a pattern match fails in a lambda, a runtime error occurs, so be careful!
+```
+
+### I Fold You So 
+
+> Folds can be used to implement any function where you traverse a list once, element by element, 
+>
+> and then return something based on that. Whenever you want to **traverse a list to return something**, chances are you want a fold
+
+- foldr: from right
+- foldl: from left 
+
+
+
+- foldr1
+- foldl1
+
+> Because they depend on the lists they’re called with **having at least one element**, 
+>
+> these functions cause **runtime errors** if called with empty lists. foldl and foldr, on the other hand, work fine with empty lists.
+
+```haskell
+sum' :: (Num a) => [a] -> a
+sum' = foldl (+) 0
+
+map' :: (a -> b) -> [a] -> [b] 
+map' f xs = foldr (\x acc -> f x : acc) [] xs
 ```
 
