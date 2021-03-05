@@ -461,5 +461,10 @@ sum' = foldl (+) 0
 
 map' :: (a -> b) -> [a] -> [b] 
 map' f xs = foldr (\x acc -> f x : acc) [] xs
+
+reverse' :: [a] -> [a] 
+reverse' = foldl (\acc x -> x : acc) []
+reverse' = foldl (flip (:)) []
+
 ```
 
